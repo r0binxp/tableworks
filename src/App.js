@@ -1,24 +1,16 @@
-import logo from './logo.svg';
 import './App.css';
+import Login from './components/Login/Login'
+import { useSelector } from 'react-redux';
 
 function App() {
+  const sesionLogged = window.sessionStorage.getItem('logged')
+  const logged = useSelector(store => store.logged)
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {logged || sesionLogged ? <h1>La Tabla</h1> : <Login />}
+    </>
   );
 }
 
