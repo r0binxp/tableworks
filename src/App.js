@@ -1,5 +1,7 @@
 import './App.css';
+// components
 import Login from './components/Login/Login'
+import Table from './components/Table/Table'
 import { useSelector } from 'react-redux';
 
 function App() {
@@ -9,7 +11,7 @@ function App() {
 
   return (
     <>
-      {logged || sesionLogged ? <h1>La Tabla</h1> : <Login />}
+      {logged || sesionLogged ? <Table /> : <Login />}
     </>
   );
 }

@@ -4,6 +4,7 @@ import {createStore} from "redux"
 const initialState = {
     users: [
         {
+            id: "1",
             firstName: "Jose Luis",
             LastName: "Perez",
             email: "jlperez@gmail.com",
@@ -16,6 +17,7 @@ const initialState = {
                 {location:"Bolivia", date: 'October 15, 2020 23:15:30'},
         ]},
         {
+            id: "2",
             firstName: "Raul",
             LastName: "Alderete",
             email: "raulhot99@gmail.com",
@@ -28,6 +30,7 @@ const initialState = {
                 {location:"Bolivia", date: 'October 15, 2020 23:15:30'},
         ]},
         {
+            id: "3",
             firstName: "Maria Laura",
             LastName: "Adriani",
             email: "mladriani@gmail.com",
@@ -40,6 +43,7 @@ const initialState = {
                 {location:"Bolivia", date: 'October 15, 2020 23:15:30'},
         ]},
         {
+            id: "4",
             firstName: "Xavier",
             LastName: "Pertuzi",
             email: "xavierphoto@gmail.com",
@@ -53,26 +57,21 @@ const initialState = {
         ]},
             
     ],
+    columns: [
+        {title: 'Name', field: 'firstName'},
+        {title: 'LastName', field: 'LastName'},
+        {title: 'E-mail', field: 'email'},
+        {title: 'Dni', field: 'dni'},
+        {title: 'Address', field: 'address'},
+        {title: 'Creation Date', field: 'creationDate'},
+    ],
     logged: false,
     selectedUser: "",
-    count: 0,
 }
 
 
 const reduceStore = (state = initialState, action) => {
     switch (action.type){
-        case 'INCREMENT':
-            return({
-                ...state, 
-                count: state.count + 1
-            })
-        break;
-        case 'DECREMENT':
-            return({
-                ...state, 
-                count: state.count - 1
-            })
-        break;
         case 'LOGGED':
             console.log("action en logged", action)
             return({
@@ -80,8 +79,42 @@ const reduceStore = (state = initialState, action) => {
                 logged: action.payload
             })
         break;
+        case 'DELETE_USER':
+            console.log("DELETE", action)
+            return({
+                ...state, 
+                users: state.users.filter(user => user.id !== action.payload)
+            })
+        break;
+        case 'SELECTED_USER':
+            console.log("SELECTED", action)
+            return({
+                ...state, 
+                selectedUser: action.payload
+            })
+        break;
+        case 'EDIT_USER':
+            const updated = updateUser(state.users, action.payload)
+            const newState = Object.assign(state.users, updated)
+            return({
+                ...state, 
+                users: newState
+            })
+        break;
         default:
             return state
     }
 }
-export default createStore(reduceStore)
+
+const updateUser = (users, user) => {
+    if (users && users.length) {
+        users.map((c, i) => {
+            if (c.id === user.id) {
+                users[i] = user
+                return
+            }
+        })
+    }
+    return users;
+}
+export default createStore(reduceStore, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())

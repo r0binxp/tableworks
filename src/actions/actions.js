@@ -1,16 +1,21 @@
-export const INCREMENT = 'INCREMENT';
-export const DECREMENT = 'DECREMENT';
 export const LOGGED = 'LOGGED';
-
-export const increment = () => ({
-    type: INCREMENT
-});
-
-export const decrement = () => ({
-    type: DECREMENT
-})
+export const DELETE_USER = 'DELETE_USER';
+export const SELECTED_USER = 'SELECTED_USER';
+export const EDIT_USER = 'EDIT_USER';
 
 export const setLogged = () => ({
     type: LOGGED,
     payload: true
+})
+export const deleteUser = (payload) => ({
+    type: DELETE_USER,
+    payload: payload
+})
+export const setSelectedId = (payload) => ({
+    type: SELECTED_USER,
+    payload: payload
+})
+export const editUser = (payload) => ({
+    type: EDIT_USER,
+    payload: payload
 })
