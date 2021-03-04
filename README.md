@@ -1,6 +1,6 @@
 # Test Purposes Table and Login
 
-React.js - Redux - Material UI - React Hooks Form - React Router Dom - React Tables
+React.js - Redux - Material UI - React Hooks Form - Material Tables
 
 # Comenzar proyecto
 
