@@ -25,9 +25,9 @@ const initialState = {
             creationDate: '15-08-2019',
             address: 'Dean Funes 985',
             access: [
-                {location:"Argentina", date: 'December 25, 2020 23:15:30'},
-                {location:"Peru", date: 'December 20, 2020 23:15:30'},
-                {location:"Bolivia", date: 'October 15, 2020 23:15:30'},
+                {location:"Chile", date: 'September 30, 2020 23:15:30'},
+                {location:"Chile", date: 'September 20, 2020 23:15:30'},
+                {location:"Chile", date: 'September 15, 2020 23:15:30'},
         ]},
         {
             id: "3",
@@ -38,9 +38,9 @@ const initialState = {
             creationDate: '10-05-2019',
             address: 'Puerto Mont 1540',
             access: [
-                {location:"Argentina", date: 'December 25, 2020 23:15:30'},
-                {location:"Peru", date: 'December 20, 2020 23:15:30'},
-                {location:"Bolivia", date: 'October 15, 2020 23:15:30'},
+                {location:"Usa", date: 'December 25, 2020 23:15:30'},
+                {location:"Chile", date: 'December 20, 2020 23:15:30'},
+                {location:"Pery", date: 'October 15, 2020 23:15:30'},
         ]},
         {
             id: "4",

@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import { Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import MaterialTable from "material-table";
+import Card from '@material-ui/core/Card';
 
 // Icons
 import Create from '@material-ui/icons/Create';
@@ -16,6 +17,7 @@ import VpnKeyIcon from '@material-ui/icons/VpnKey';
 // dialogs
 import AlertDialog from '../Dialogs/AlertDialog'
 import EditDialog from '../Dialogs/EditDialog'
+import AccessHistory from '../Dialogs/AccessHistory'
 // Redux Actions
 import * as actions from '../../actions/actions'
 
@@ -75,11 +77,11 @@ export default function Table(props) {
   <>
     <Container  className={classes.Container} component="main" maxWidth="lg">
       <Typography variant="h3" gutterBottom>
-        Users Statitics
+        Users Works
       </Typography>
       <AlertDialog open={openConfirm} setOpen={setOpenConfirm} color="secondary" text={'are you sure to delete? This action can not be undone'} title={`Delete User : ${selectedUser.firstName} ${selectedUser.LastName}`} accept={() => handleDeleteUser(selectedUser)}/>
       <EditDialog open={openEdit} setOpen={setOpenEdit} color="primary"  title={`Edit User : ${selectedUser.firstName} ${selectedUser.LastName}`} user={selectedUser} handleEditUser={() => handleEditUser}/>
-      <EditDialog open={openHistory} setOpen={setOpenHistory} color="primary"  title={`Acces History : ${selectedUser.firstName} ${selectedUser.LastName}`} user={selectedUser} handleEditUser={() => handleEditUser}/>
+      <AccessHistory open={openHistory} setOpen={setOpenHistory} color="primary"  title={`Acces History : ${selectedUser.firstName} ${selectedUser.LastName}`} user={selectedUser} />
       {users && (
         <MaterialTable
           icons={{ Filter: () => <FilterListIcon  fontSize="small" color='disabled' /> }}
@@ -113,7 +115,9 @@ export default function Table(props) {
       )}
     </Container>
     <Container  className={classes.Container} component="main" maxWidth="lg">
-      <h1> hola</h1>
+        <Card>
+            <h1> hola</h1>
+        </Card>
     </Container>
   </>
   );

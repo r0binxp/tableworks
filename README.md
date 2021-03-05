@@ -4,7 +4,8 @@ React.js - Redux - Material UI - React Hooks Form - Material Tables
 
 # Comenzar proyecto
 
-Npm run Start 
+yarn install
+yarn start
 
 
 # Acceso
