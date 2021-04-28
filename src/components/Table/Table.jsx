@@ -8,6 +8,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import MaterialTable from "material-table";
 import Card from '@material-ui/core/Card';
 
+// Components
+import VisualizationData from '../Visualization/VisualizationData'
+
 // Icons
 import Create from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -55,6 +58,7 @@ export default function Table(props) {
     const setSelectedId = (payload) => dispatch( actions.setSelectedId(payload) );
     const deleteUser = (payload) => dispatch( actions.deleteUser(payload));
     const editUser = (payload) => dispatch( actions.editUser(payload));
+    
     // store redux
     const selectedUser = useSelector(store => store.selectedUser)
     const users = useSelector(store => store.users)
@@ -116,7 +120,7 @@ export default function Table(props) {
     </Container>
     <Container  className={classes.Container} component="main" maxWidth="lg">
         <Card>
-            <h1> hola</h1>
+          <VisualizationData />
         </Card>
     </Container>
   </>
