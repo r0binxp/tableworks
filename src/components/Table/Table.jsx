@@ -132,7 +132,7 @@ export default function Table(props) {
       </Card>
     </Container>
     <Container  className={classes.Container} component="main" >
-        <Card>
+        <Card className="mb-5">
           <VisualizationData />
         </Card>
     </Container>

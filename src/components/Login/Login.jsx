@@ -119,7 +119,7 @@ export default function Login() {
             name="email"
             as={
                 <TextField
-                    variant="outlined"
+                    variant="standard"
                     margin="normal"
                     required
                     fullWidth
@@ -147,15 +147,15 @@ export default function Login() {
             name="password"
             as={
                 <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                label="Password"
-                helperText={fieldsErrors.password ? fieldsErrors.password.message : null}
-                type="password"
-                id="password"
-                autoComplete="current-password"
+                  variant="standard"
+                  margin="normal"
+                  required
+                  fullWidth
+                  label="Password"
+                  helperText={fieldsErrors.password ? fieldsErrors.password.message : null}
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
                 />
             }
             defaultValue=""
