@@ -1,5 +1,5 @@
 import React, {useState } from 'react';
-  import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 // Material UI
 import { Container } from '@material-ui/core';
@@ -24,6 +24,7 @@ import AccessHistory from '../Dialogs/AccessHistory'
 // Redux Actions
 import * as actions from '../../actions/actions'
 import Header from '../Header/Header'
+import Map from '../Map/Map';
 
 
 
@@ -131,8 +132,13 @@ export default function Table(props) {
       )}
       </Card>
     </Container>
-    <Container  className={classes.Container} component="main" >
-        <Card className="mb-5">
+    <Container className={classes.Container} component="main">
+      <Card className="mt-5">
+        <Map/>
+      </Card>
+    </Container>
+    <Container className={classes.Container} component="main" >
+        <Card className="mb-5 mt-5">
           <VisualizationData />
         </Card>
     </Container>

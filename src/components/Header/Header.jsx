@@ -15,7 +15,7 @@ const Header = () => {
         <div className="container-fluid">
             <div className="row bg-white header align-items-center">
                 <div className="col-4 ps-5">
-                    <img className="logo-header" width="120" src="Logo-horizontal.png" alt="Logo Wispro" />
+                    <img width="120" src="Logo-horizontal.png" alt="Logo Wispro" />
                 </div>
                 <div className="col-8">
                     <div className="row justify-content-end pe-5 pt-2 align-items-center">

@@ -12,6 +12,10 @@ const initialState = {
             dni: 28534292,
             creationDate: '20-12-2019',
             address: 'San Luis 2050',
+            location: {
+                lat: -32.94663832618656, 
+                lng: -60.65214082839065,
+            },
             access: [
                 {location:"Argentina", date: 'December 25, 2020 23:15:30'},
                 {location:"Peru", date: 'December 20, 2020 23:15:30'},
@@ -25,6 +29,10 @@ const initialState = {
             dni: 25535222,
             creationDate: '15-08-2019',
             address: 'Dean Funes 985',
+            location: {
+                lat: -32.976097462171055,
+                lng: -60.6438664135545,
+            },
             access: [
                 {location:"Chile", date: 'September 30, 2020 23:15:30'},
                 {location:"Chile", date: 'September 20, 2020 23:15:30'},
@@ -37,7 +45,11 @@ const initialState = {
             email: "mladriani@gmail.com",
             dni: 5457123,
             creationDate: '10-05-2019',
-            address: 'Puerto Mont 1540',
+            address: 'Navarro 6224',
+            location: {
+                lat: -32.931310, 
+                lng: -60.707500,
+            },
             access: [
                 {location:"Usa", date: 'December 25, 2020 23:15:30'},
                 {location:"Chile", date: 'December 20, 2020 23:15:30'},
@@ -50,7 +62,11 @@ const initialState = {
             email: "xavierphoto@gmail.com",
             dni: 25487523,
             creationDate: '05-01-2018',
-            address: 'Zavalla 5010',
+            address: '1 de Mayo 1300',
+            location: {
+                lat: -32.95410626224765, 
+                lng: -60.631345513554884,
+            },
             access: [
                 {location:"Argentina", date: 'December 25, 2020 23:15:30'},
                 {location:"Peru", date: 'December 20, 2020 23:15:30'},
