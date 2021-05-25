@@ -1,4 +1,11 @@
 import './App.css';
+// react-router
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 // components
 import Login from './components/Login/Login'
 import Table from './components/Table/Table'
@@ -11,7 +18,13 @@ function App() {
 
   return (
     <>
-      {logged || sesionLogged ? <Table /> : <Login />}
+      <Router>
+        <Switch>
+          <Route path="/login" component={Login} />
+          <Route path="/table" component={Table} />
+          <Route path="/" component={Login} />
+        </Switch>
+      </Router>
     </>
   );
 }

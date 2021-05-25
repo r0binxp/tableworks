@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+  import { useDispatch, useSelector } from 'react-redux';
 
 // Material UI
 import Typography from '@material-ui/core/Typography';
@@ -23,7 +23,7 @@ import EditDialog from '../Dialogs/EditDialog'
 import AccessHistory from '../Dialogs/AccessHistory'
 // Redux Actions
 import * as actions from '../../actions/actions'
-
+import Header from '../Header/Header'
 
 const useStyles = makeStyles((theme) => ({
   Container: {
@@ -41,9 +41,6 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
 }));
-
-
-
 
 
 export default function Table(props) {
@@ -79,14 +76,22 @@ export default function Table(props) {
 
   return (
   <>
+    <Header/>
     <Container  className={classes.Container} component="main" maxWidth="lg">
-      <Typography variant="h3" gutterBottom>
-        Users Works
-      </Typography>
-      <AlertDialog open={openConfirm} setOpen={setOpenConfirm} color="secondary" text={'are you sure to delete? This action can not be undone'} title={`Delete User : ${selectedUser.firstName} ${selectedUser.LastName}`} accept={() => handleDeleteUser(selectedUser)}/>
+      <AlertDialog open={openConfirm} setOpen={setOpenConfirm} color="secondary" text={'Are you sure to delete? This action can not be undone'} title={`Delete User : ${selectedUser.firstName} ${selectedUser.LastName}`} accept={() => handleDeleteUser(selectedUser)}/>
       <EditDialog open={openEdit} setOpen={setOpenEdit} color="primary"  title={`Edit User : ${selectedUser.firstName} ${selectedUser.LastName}`} user={selectedUser} handleEditUser={() => handleEditUser}/>
       <AccessHistory open={openHistory} setOpen={setOpenHistory} color="primary"  title={`Acces History : ${selectedUser.firstName} ${selectedUser.LastName}`} user={selectedUser} />
+      <Card>
+
       {users && (
+        <>
+        <div className="row">
+          <div className="col-12 py-2 bg-primary ">
+            <div className="row">
+              <h3 className="ms-4 mb-0 text-light">Users</h3>
+            </div>
+          </div>
+        </div>
         <MaterialTable
           icons={{ Filter: () => <FilterListIcon  fontSize="small" color='disabled' /> }}
           mt={4}
@@ -114,11 +119,13 @@ export default function Table(props) {
           }}
           data={Array.from(users)}
           columns={columns}
-          title="Users Table"
+          title={""}
         />
+        </>
       )}
+      </Card>
     </Container>
-    <Container  className={classes.Container} component="main" maxWidth="lg">
+    <Container  className={classes.Container} component="main" >
         <Card>
           <VisualizationData />
         </Card>

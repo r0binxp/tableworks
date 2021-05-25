@@ -101,6 +101,13 @@ const reduceStore = (state = initialState, action) => {
                 users: newState
             })
         break;
+        case 'LOG_OUT':
+            console.log("LOGOUT", action)
+            return({
+                ...state,
+                logged: action.payload
+            })
+        break;
         default:
             return state
     }

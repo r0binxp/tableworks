@@ -6,6 +6,8 @@ import CircularProgressWithLabel from '../CircularProgressWithLabel/CircularProg
 // Colors
 import purple from '@material-ui/core/colors/purple';
 
+//CSS
+import '../../index.css'
 
 
 const VisualizationData = () => {
@@ -33,7 +35,12 @@ const VisualizationData = () => {
     },[])
 
     return (
-        <div className="row p-3">
+        <div className="row pb-5">
+            <div className="col-12 py-2 bg-primary mb-5">
+                <div className="row align-items-center">
+                    <h3 className="ms-4 mb-0 text-light">Statistics</h3>
+                </div>
+            </div>
             <div className="col-12 col-xl-4 text-center mt-4 mt-xl-0">
                 <CircularProgressWithLabel text="CPU" thickness={10} value={cpu} />
             </div>
@@ -41,7 +48,7 @@ const VisualizationData = () => {
                 <CircularProgressWithLabel text="MEM" color="secondary" thickness={10} value={mem} />
             </div>
             <div className="col-12 col-xl-4 text-center mt-4 mt-xl-0">
-            <CircularProgressWithLabel text="MEM" style={{color: purple[500]}} thickness={10} value={disk} />
+            <CircularProgressWithLabel text="DISK" style={{color: purple[500]}} thickness={10} value={disk} />
             </div>
         </div>
     );

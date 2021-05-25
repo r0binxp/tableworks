@@ -11,3 +11,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.header {
+  height: 80px;
+}
+
+.statistics-header {
+  height: 55px;
+}
+
+.topNavigationButton {
+  max-width: 100px;
+}

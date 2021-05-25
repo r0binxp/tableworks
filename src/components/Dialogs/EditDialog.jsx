@@ -42,7 +42,7 @@ export default function EditDialog(props) {
                             as={
                                 <TextField
                                 ref={register}
-                                variant="outlined"
+                               
                                 margin="normal"
                                 fullWidth
                                 label={"id"}
@@ -62,7 +62,7 @@ export default function EditDialog(props) {
                             name="creationDate"
                             as={
                                 <TextField
-                                variant="outlined"
+                              
                                 margin="normal"
                                 fullWidth
                                 label={"creationDate"}
@@ -81,8 +81,8 @@ export default function EditDialog(props) {
                             name="tableData"
                             as={
                                 <TextField
-                                variant="outlined"
                                 margin="normal"
+                                variant="standard"
                                 fullWidth
                                 label={"tableData"}
                                 defaultValue={user.tableData}
@@ -100,13 +100,13 @@ export default function EditDialog(props) {
                             name="access"
                             as={
                                 <TextField
-                                variant="outlined"
-                                margin="normal"
-                                fullWidth
-                                label={"access"}
-                                defaultValue={user.access}
-                                helperText={fieldsErrors.access ? fieldsErrors.access.message : null}
-                                id="access"
+                                    variant="standard"
+                                    margin="normal"
+                                    fullWidth
+                                    label={"access"}
+                                    defaultValue={user.access}
+                                    helperText={fieldsErrors.access ? fieldsErrors.access.message : null}
+                                    id="access"
                                 />
                             }
                             type="hidden"
@@ -122,7 +122,7 @@ export default function EditDialog(props) {
                         as={
                             <TextField
                             ref={register}
-                            variant="outlined"
+                            variant="standard"
                             margin="normal"
                             fullWidth
                             label={"Name"}
@@ -148,7 +148,7 @@ export default function EditDialog(props) {
                         as={
                             <TextField
                             ref={register}
-                            variant="outlined"
+                            variant="standard"
                             margin="normal"
                             fullWidth
                             label={"LastName"}
@@ -174,7 +174,7 @@ export default function EditDialog(props) {
                         as={
                             <TextField
                             ref={register}
-                            variant="outlined"
+                            variant="standard"
                             margin="normal"
                             fullWidth
                             label={"E-mail"}
@@ -205,7 +205,7 @@ export default function EditDialog(props) {
                         as={
                             <TextField
                             ref={register}
-                            variant="outlined"
+                            variant="standard"
                             margin="normal"
                             fullWidth
                             label={"Dni"}
@@ -232,7 +232,7 @@ export default function EditDialog(props) {
                         as={
                             <TextField
                             ref={register}
-                            variant="outlined"
+                            variant="standard"
                             margin="normal"
                             fullWidth
                             label={"Address"}
@@ -257,16 +257,16 @@ export default function EditDialog(props) {
             
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
+            <Button onClick={handleClose} color="primary">
+                Cancel
+            </Button>
           
-                <Button 
-            type="submit"
-            variant="contained"
-            color="primary">
-            Save
-          </Button>
+            <Button 
+                type="submit"
+                variant="contained"
+                color="primary">
+                Save
+            </Button>
         </DialogActions>
             </form>   
       </Dialog>
