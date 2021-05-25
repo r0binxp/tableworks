@@ -1,8 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState } from 'react';
   import { useDispatch, useSelector } from 'react-redux';
 
 // Material UI
-import Typography from '@material-ui/core/Typography';
 import { Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import MaterialTable from "material-table";
@@ -17,13 +16,16 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
 
-// dialogs
+// Dialogs
 import AlertDialog from '../Dialogs/AlertDialog'
 import EditDialog from '../Dialogs/EditDialog'
 import AccessHistory from '../Dialogs/AccessHistory'
+
 // Redux Actions
 import * as actions from '../../actions/actions'
 import Header from '../Header/Header'
+
+
 
 const useStyles = makeStyles((theme) => ({
   Container: {
@@ -59,7 +61,14 @@ export default function Table(props) {
     // store redux
     const selectedUser = useSelector(store => store.selectedUser)
     const users = useSelector(store => store.users)
-    const columns = useSelector(store => store.columns)
+    const columns = [
+      {title: 'Name', field: 'firstName'},
+      {title: 'LastName', field: 'LastName'},
+      {title: 'E-mail', field: 'email'},
+      {title: 'Dni', field: 'dni'},
+      {title: 'Address', field: 'address'},
+      {title: 'Creation Date', field: 'creationDate'},
+    ]
     
 
     const handleDeleteUser = (user) => {
@@ -68,12 +77,9 @@ export default function Table(props) {
     const handleEditUser = (user) => {
       editUser(user)
       setOpenEdit(false)
+      dispatch(actions.setSelectedId(""))
     }
     
-  
-
-  
-
   return (
   <>
     <Header/>

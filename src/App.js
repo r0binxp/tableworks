@@ -9,20 +9,16 @@ import {
 // components
 import Login from './components/Login/Login'
 import Table from './components/Table/Table'
-import { useSelector } from 'react-redux';
+import PrivateRoute from './PrivateRoute';
 
 function App() {
-  const sesionLogged = window.sessionStorage.getItem('logged')
-  const logged = useSelector(store => store.logged)
-
 
   return (
     <>
       <Router>
         <Switch>
-          <Route path="/login" component={Login} />
-          <Route path="/table" component={Table} />
-          <Route path="/" component={Login} />
+          <Route exact path="/login" component={Login} />
+          <PrivateRoute exact path="/" component={Table} />
         </Switch>
       </Router>
     </>

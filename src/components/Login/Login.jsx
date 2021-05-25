@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import { useForm, Controller  } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 // Material Ui
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -18,9 +18,9 @@ import Container from '@material-ui/core/Container';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 // Actions
-import * as actions from '../../actions/actions'
-
-
+import * as actions from '../../actions/actions';
+// React Router
+import { useHistory } from "react-router-dom";
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -64,9 +64,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-
-
-
 export default function Login() {
     const {handleSubmit, control, errors: fieldsErrors } = useForm();
     const classes = useStyles();
@@ -74,7 +71,7 @@ export default function Login() {
     const [succes, setSucces] = useState(false)
     const dispatch = useDispatch();
     const setLogged = (payload) => dispatch( actions.setLogged(payload) );
-    const logged = useSelector(store => store.logged)
+    const history = useHistory();
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -86,9 +83,12 @@ export default function Login() {
 
   const onSubmit = (event) => {
       if(event.email === 'matias@wispro.com' && event.password === '12345'){
-           setSucces(true)
-           setLogged(true)
-           window.sessionStorage.setItem('logged', 'true')
+          setSucces(true)
+          setLogged(true)
+          window.sessionStorage.setItem('logged', 'true')
+          setTimeout(() => {
+            history.push('/')
+          }, 2000)
       } else {
            setNoExist(true)
       }
@@ -99,12 +99,12 @@ export default function Login() {
       <CssBaseline />
         <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center' }} open={succes} autoHideDuration={6000} onClose={handleClose}>
             <Alert onClose={handleClose} severity="success">
-                Login Success
+                Login success
             </Alert>
         </Snackbar>
         <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center' }} open={noExist} autoHideDuration={6000} onClose={handleClose}>
             <Alert onClose={handleClose} severity="error">
-                User Don't Exists
+                User doesn't exist
             </Alert>
         </Snackbar>
       <div className={classes.paper}>

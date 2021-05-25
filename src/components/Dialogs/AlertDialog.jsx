@@ -6,12 +6,15 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { setSelectedId } from '../../actions/actions';
+import { useDispatch } from 'react-redux';
 
 export default function AlertDialog(props) {
-
+  const dispatch = useDispatch();
 
   const handleClose = () => {
     props.setOpen(false);
+    dispatch(setSelectedId(""))
   };
 
   return (
@@ -32,7 +35,7 @@ export default function AlertDialog(props) {
           <Button onClick={handleClose} color="disabled">
             Cancel
           </Button>
-          <Button onClick={() => {props.accept();props.setOpen(false)}} color={props.color} variant="contained" autoFocus>
+          <Button onClick={() => {props.accept();props.setOpen(false);dispatch(setSelectedId(""))}} color={props.color} variant="contained" autoFocus>
             Accept
           </Button>
         </DialogActions>

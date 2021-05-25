@@ -9,10 +9,8 @@ const Header = () => {
     
     const logOut = () => {
         dispatch(actions.logOut())
-        window.sessionStorage.setItem('logged', 'false')
-        window.location.reload(true);
-
     }
+    
     return (
         <div className="container-fluid">
             <div className="row bg-white header align-items-center">

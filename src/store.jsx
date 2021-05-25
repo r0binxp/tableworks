@@ -1,5 +1,6 @@
 import {createStore} from "redux"
-
+import { loadState, saveState } from "./localStorage"
+import { throttle } from "lodash-es"
 
 const initialState = {
     users: [
@@ -57,57 +58,45 @@ const initialState = {
         ]},
             
     ],
-    columns: [
-        {title: 'Name', field: 'firstName'},
-        {title: 'LastName', field: 'LastName'},
-        {title: 'E-mail', field: 'email'},
-        {title: 'Dni', field: 'dni'},
-        {title: 'Address', field: 'address'},
-        {title: 'Creation Date', field: 'creationDate'},
-    ],
+    
     logged: false,
     selectedUser: "",
 }
 
-
 const reduceStore = (state = initialState, action) => {
     switch (action.type){
         case 'LOGGED':
-            console.log("action en logged", action)
             return({
                 ...state, 
                 logged: action.payload
-            })
-        break;
+            });
+        
         case 'DELETE_USER':
-            console.log("DELETE", action)
             return({
                 ...state, 
                 users: state.users.filter(user => user.id !== action.payload)
-            })
-        break;
+            });
+
         case 'SELECTED_USER':
-            console.log("SELECTED", action)
             return({
                 ...state, 
                 selectedUser: action.payload
-            })
-        break;
+            });
+        
         case 'EDIT_USER':
             const updated = updateUser(state.users, action.payload)
             const newState = Object.assign(state.users, updated)
             return({
                 ...state, 
                 users: newState
-            })
-        break;
+            });
+        
         case 'LOG_OUT':
-            console.log("LOGOUT", action)
             return({
                 ...state,
                 logged: action.payload
-            })
-        break;
+            });
+        
         default:
             return state
     }
@@ -124,4 +113,12 @@ const updateUser = (users, user) => {
     }
     return users;
 }
-export default createStore(reduceStore, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+
+const persistedState = loadState()
+
+export const store = createStore(reduceStore, persistedState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+
+store.subscribe(throttle(() => {
+    saveState( store.getState() )
+
+}, 1000))

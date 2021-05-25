@@ -4,7 +4,7 @@ import React from 'react';
 import { Box, CircularProgress, Typography } from '@material-ui/core';
 
 function CircularProgressWithLabel(props) {
-    console.log( "hardware",navigator.hardwareConcurrency)
+    // console.log( "hardware",navigator.hardwareConcurrency)
     return (
       <Box position="relative" className="justify-content-center" display="inline-flex">
         <CircularProgress justifyContent="center" size={150} variant="determinate" {...props} />
