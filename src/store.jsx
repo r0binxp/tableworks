@@ -1,6 +1,14 @@
+// Redux
 import {createStore} from "redux"
-import { loadState, saveState } from "./localStorage"
+
+// LocalStorage
+import { loadState, saveState } from "./localStorage/localStorage"
+
+// Lodash-es
 import { throttle } from "lodash-es"
+
+// Types
+import * as types from './types/types'
 
 const initialState = {
     users: [
@@ -81,25 +89,25 @@ const initialState = {
 
 const reduceStore = (state = initialState, action) => {
     switch (action.type){
-        case 'LOGGED':
+        case types.LOGGED:
             return({
                 ...state, 
                 logged: action.payload
             });
         
-        case 'DELETE_USER':
+        case types.DELETE_USER:
             return({
                 ...state, 
                 users: state.users.filter(user => user.id !== action.payload)
             });
 
-        case 'SELECTED_USER':
+        case types.SELECTED_USER:
             return({
                 ...state, 
                 selectedUser: action.payload
             });
         
-        case 'EDIT_USER':
+        case types.EDIT_USER:
             const updated = updateUser(state.users, action.payload)
             const newState = Object.assign(state.users, updated)
             return({
@@ -107,7 +115,7 @@ const reduceStore = (state = initialState, action) => {
                 users: newState
             });
         
-        case 'LOG_OUT':
+        case types.LOG_OUT:
             return({
                 ...state,
                 logged: action.payload
@@ -136,5 +144,4 @@ export const store = createStore(reduceStore, persistedState, window.__REDUX_DEV
 
 store.subscribe(throttle(() => {
     saveState( store.getState() )
-
 }, 1000))

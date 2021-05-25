@@ -1,4 +1,6 @@
 import React, {useState } from 'react';
+
+// Redux
 import { useDispatch, useSelector } from 'react-redux';
 
 // Material UI
@@ -23,10 +25,10 @@ import AccessHistory from '../Dialogs/AccessHistory'
 
 // Redux Actions
 import * as actions from '../../actions/actions'
+
+// Components
 import Header from '../Header/Header'
 import Map from '../Map/Map';
-
-
 
 const useStyles = makeStyles((theme) => ({
   Container: {
@@ -45,7 +47,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 export default function Table(props) {
     const dispatch = useDispatch();
     
@@ -53,6 +54,7 @@ export default function Table(props) {
     const [openConfirm, setOpenConfirm] = useState(false)
     const [openEdit, setOpenEdit] = useState(false)
     const [openHistory, setOpenHistory] = useState(false)
+    const [selected, setSelected] = useState()
     
     // store actions
     const setSelectedId = (payload) => dispatch( actions.setSelectedId(payload) );
@@ -71,7 +73,6 @@ export default function Table(props) {
       {title: 'Creation Date', field: 'creationDate'},
     ]
     
-
     const handleDeleteUser = (user) => {
       deleteUser(user.id)
     }
@@ -80,68 +81,78 @@ export default function Table(props) {
       setOpenEdit(false)
       dispatch(actions.setSelectedId(""))
     }
+
+    const handleDataUserSelected = (location) => {
+      setSelected({
+        lat: location.lat,
+        lng: location.lng
+      })
+    }
     
   return (
-  <>
-    <Header/>
-    <Container  className={classes.Container} component="main" maxWidth="lg">
-      <AlertDialog open={openConfirm} setOpen={setOpenConfirm} color="secondary" text={'Are you sure to delete? This action can not be undone'} title={`Delete User : ${selectedUser.firstName} ${selectedUser.LastName}`} accept={() => handleDeleteUser(selectedUser)}/>
-      <EditDialog open={openEdit} setOpen={setOpenEdit} color="primary"  title={`Edit User : ${selectedUser.firstName} ${selectedUser.LastName}`} user={selectedUser} handleEditUser={() => handleEditUser}/>
-      <AccessHistory open={openHistory} setOpen={setOpenHistory} color="primary"  title={`Acces History : ${selectedUser.firstName} ${selectedUser.LastName}`} user={selectedUser} />
-      <Card>
+    <>
+      <Header/>
+      <Container  className={classes.Container} component="main" maxWidth="lg">
+        <AlertDialog open={openConfirm} setOpen={setOpenConfirm} color="secondary" text={'Are you sure to delete? This action can not be undone'} title={`Delete User : ${selectedUser.firstName} ${selectedUser.LastName}`} accept={() => handleDeleteUser(selectedUser)}/>
+        <EditDialog open={openEdit} setOpen={setOpenEdit} color="primary"  title={`Edit User : ${selectedUser.firstName} ${selectedUser.LastName}`} user={selectedUser} handleEditUser={() => handleEditUser}/>
+        <AccessHistory open={openHistory} setOpen={setOpenHistory} color="primary"  title={`Acces History : ${selectedUser.firstName} ${selectedUser.LastName}`} user={selectedUser} />
 
-      {users && (
-        <>
-        <div className="row">
-          <div className="col-12 py-2 bg-primary ">
-            <div className="row">
-              <h3 className="ms-4 mb-0 text-light">Users</h3>
-            </div>
-          </div>
-        </div>
-        <MaterialTable
-          icons={{ Filter: () => <FilterListIcon  fontSize="small" color='disabled' /> }}
-          mt={4}
-          actions={[
-            {
-              icon: () => <Create color="primary" />,
-              tooltip: 'Save User',
-              onClick: (event, rowData) => {setOpenEdit(true);setSelectedId(rowData)}
-            },
-            {
-              icon: () => <DeleteIcon color="secondary" />,
-              tooltip: 'Delete User',
-              onClick: (event, rowData) => {setOpenConfirm(true);setSelectedId(rowData)}
-            },
-            {
-              icon: () => <VpnKeyIcon color="default" />,
-              tooltip: 'Acces History',
-              onClick: (event, rowData) => {setOpenHistory(true);setSelectedId(rowData)}
-            }
-          ]}
-          options={{
-            filtering: true,
-            editable: true,
-            actionsColumnIndex: -1
-          }}
-          data={Array.from(users)}
-          columns={columns}
-          title={""}
-        />
-        </>
-      )}
-      </Card>
-    </Container>
-    <Container className={classes.Container} component="main">
-      <Card className="mt-5">
-        <Map/>
-      </Card>
-    </Container>
-    <Container className={classes.Container} component="main" >
-        <Card className="mb-5 mt-5">
-          <VisualizationData />
+        <Card>
+          {users && (
+            <>
+              <div className="row">
+                <div className="col-12 py-2 cards-header">
+                  <div className="row">
+                    <h3 className="ms-4 mb-0 text-light">Users</h3>
+                  </div>
+                </div>
+              </div>
+              <MaterialTable
+                icons={{ Filter: () => <FilterListIcon  fontSize="small" color='disabled' /> }}
+                mt={4}
+                actions={[
+                  {
+                    icon: () => <Create color="primary" />,
+                    tooltip: 'Save User',
+                    onClick: (event, rowData) => {setOpenEdit(true);setSelectedId(rowData)}
+                  },
+                  {
+                    icon: () => <DeleteIcon color="secondary" />,
+                    tooltip: 'Delete User',
+                    onClick: (event, rowData) => {setOpenConfirm(true);setSelectedId(rowData)}
+                  },
+                  {
+                    icon: () => <VpnKeyIcon color="default" />,
+                    tooltip: 'Acces History',
+                    onClick: (event, rowData) => {setOpenHistory(true);setSelectedId(rowData)}
+                  }
+                ]}
+                options={{
+                  filtering: true,
+                  editable: true,
+                  actionsColumnIndex: -1
+                }}
+                data={Array.from(users)}
+                onRowClick={(e, rowData) => handleDataUserSelected(rowData.location) }
+                columns={columns}
+                title={""}
+              />
+            </>
+          )}
         </Card>
-    </Container>
-  </>
+      </Container>
+      <Container className={classes.Container} component="main">
+        <Card className="mt-5">
+          <Map
+            selectedUser={selected}
+          />
+        </Card>
+      </Container>
+      <Container className={classes.Container} component="main" >
+          <Card className="mb-5 mt-5">
+            <VisualizationData />
+          </Card>
+      </Container>
+    </>
   );
 }

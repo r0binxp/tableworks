@@ -1,15 +1,18 @@
+// CSS
 import './App.css';
-// react-router
+
+// React Router Dom
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link
 } from "react-router-dom";
-// components
+
+// Components
 import Login from './components/Login/Login'
 import Table from './components/Table/Table'
-import PrivateRoute from './PrivateRoute';
+import PrivateRoute from './privateRoute/PrivateRoute';
 
 function App() {
 

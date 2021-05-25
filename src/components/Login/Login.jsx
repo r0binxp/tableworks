@@ -1,7 +1,12 @@
-import React,{useState} from 'react';
+import React, {useState} from 'react';
+
+//React Hook Form
 import { useForm, Controller  } from 'react-hook-form';
+
+// Redux
 import { useDispatch } from 'react-redux';
-// Material Ui
+
+// Material UI
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -17,20 +22,22 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
+
 // Actions
 import * as actions from '../../actions/actions';
-// React Router
+
+// React Router Dom
 import { useHistory } from "react-router-dom";
 
 function Alert(props) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
-  }
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
+    <Typography variant="body2" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
+      <Link color="inherit" href="https://www.behance.net/r0bin">
         Matias Heredia
       </Link>{' '}
       {new Date().getFullYear()}
@@ -63,15 +70,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 export default function Login() {
-    const {handleSubmit, control, errors: fieldsErrors } = useForm();
-    const classes = useStyles();
-    const [noExist, setNoExist] = useState(false)
-    const [succes, setSucces] = useState(false)
-    const dispatch = useDispatch();
-    const setLogged = (payload) => dispatch( actions.setLogged(payload) );
-    const history = useHistory();
+  const {handleSubmit, control, errors: fieldsErrors } = useForm();
+  const classes = useStyles();
+  const [noExist, setNoExist] = useState(false)
+  const [succes, setSucces] = useState(false)
+  const dispatch = useDispatch();
+  const setLogged = (payload) => dispatch( actions.setLogged(payload) );
+  const history = useHistory();
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -82,16 +88,16 @@ export default function Login() {
   };
 
   const onSubmit = (event) => {
-      if(event.email === 'matias@wispro.com' && event.password === '12345'){
-          setSucces(true)
-          setLogged(true)
-          window.sessionStorage.setItem('logged', 'true')
-          setTimeout(() => {
-            history.push('/')
-          }, 2000)
-      } else {
-           setNoExist(true)
-      }
+    if(event.email === 'matias@wispro.com' && event.password === '12345'){
+        setSucces(true)
+        setLogged(true)
+        window.sessionStorage.setItem('logged', 'true')
+        setTimeout(() => {
+          history.push('/')
+        }, 2000)
+    } else {
+          setNoExist(true)
+    }
   }
 
   return (
@@ -118,18 +124,18 @@ export default function Login() {
             <Controller
             name="email"
             as={
-                <TextField
-                    variant="standard"
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="email"
-                    label="Email Address"
-                    name="email"
-                    autoComplete="email"
-                    helperText={fieldsErrors.email ? fieldsErrors.email.message : null}
-                    autoFocus
-                />}
+              <TextField
+                  variant="standard"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                  helperText={fieldsErrors.email ? fieldsErrors.email.message : null}
+                  autoFocus
+              />}
             defaultValue='' 
             control={control}
             rules={{
@@ -146,34 +152,31 @@ export default function Login() {
           <Controller
             name="password"
             as={
-                <TextField
-                  variant="standard"
-                  margin="normal"
-                  required
-                  fullWidth
-                  label="Password"
-                  helperText={fieldsErrors.password ? fieldsErrors.password.message : null}
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                  className="mb-4"
-                />
-            }
+              <TextField
+                variant="standard"
+                margin="normal"
+                required
+                fullWidth
+                label="Password"
+                helperText={fieldsErrors.password ? fieldsErrors.password.message : null}
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                className="mb-4"
+              />}
             defaultValue=""
             control={control}
             error={fieldsErrors.email}
             rules={{
-                required: {
-                    value: true,
-                    message: 'Password is required'},
-                minLength: {
-                    value: 3,
-                    message: 'Password length is more than 3 characters'
-                  }
+              required: {
+                  value: true,
+                  message: 'Password is required'},
+              minLength: {
+                  value: 3,
+                  message: 'Password length is more than 3 characters'
+                }
             }}
           />
-
-
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"

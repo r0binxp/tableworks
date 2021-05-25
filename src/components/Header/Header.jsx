@@ -1,7 +1,15 @@
 import React from 'react';
+
+// CSS
 import '../../index.css'
+
+// Material UI
 import { Button } from '@material-ui/core';
+
+//Redux
 import { useDispatch } from 'react-redux';
+
+// Actions
 import * as actions from '../../actions/actions'
 
 const Header = () => { 

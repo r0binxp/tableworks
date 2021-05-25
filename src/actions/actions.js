@@ -1,26 +1,27 @@
-export const LOGGED = 'LOGGED';
-export const DELETE_USER = 'DELETE_USER';
-export const SELECTED_USER = 'SELECTED_USER';
-export const EDIT_USER = 'EDIT_USER';
-export const LOG_OUT = 'LOG_OUT'
+// Types
+import * as types from '../types/types'
 
 export const setLogged = () => ({
-    type: LOGGED,
+    type: types.LOGGED,
     payload: true
 })
+
 export const deleteUser = (payload) => ({
-    type: DELETE_USER,
+    type: types.DELETE_USER,
     payload: payload
 })
+
 export const setSelectedId = (payload) => ({
-    type: SELECTED_USER,
+    type: types.SELECTED_USER,
     payload: payload
 })
+
 export const editUser = (payload) => ({
-    type: EDIT_USER,
+    type: types.EDIT_USER,
     payload: payload
 })
+
 export const logOut = () => ({
-    type: LOG_OUT,
+    type: types.LOG_OUT,
     payload: false,
 })
