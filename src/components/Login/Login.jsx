@@ -156,6 +156,7 @@ export default function Login() {
                   type="password"
                   id="password"
                   autoComplete="current-password"
+                  className="mb-4"
                 />
             }
             defaultValue=""
@@ -164,10 +165,10 @@ export default function Login() {
             rules={{
                 required: {
                     value: true,
-                    message: 'password is required'},
+                    message: 'Password is required'},
                 minLength: {
                     value: 3,
-                    message: 'password length is more than 3 characters'
+                    message: 'Password length is more than 3 characters'
                   }
             }}
           />
