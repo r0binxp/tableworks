@@ -17,6 +17,7 @@ const Header = () => {
     
     const logOut = () => {
         dispatch(actions.logOut())
+        dispatch(actions.setSelectedId(""))
     }
     
     return (

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 // Redux
 import { useSelector } from 'react-redux';
@@ -32,6 +32,10 @@ const Map = ({selectedUser}) => {
     disableDefaultUI: true,
     zoomControl: true,
   }
+
+  useEffect(() => {
+    console.log(process.env.REACT_APP_PROJECT_ID, process.env.REACT_APP_API_KEY)
+  }, [])
 
   return (
       <>
