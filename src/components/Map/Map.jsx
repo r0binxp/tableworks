@@ -23,6 +23,7 @@ const Map = ({selectedUser}) => {
     lng: -60.683479
   };
 
+  // Map initial options
   const { isLoaded } = useJsApiLoader({
       id: process.env.REACT_APP_PROJECT_ID || "",
       googleMapsApiKey: process.env.REACT_APP_API_KEY || ""
@@ -32,6 +33,7 @@ const Map = ({selectedUser}) => {
     disableDefaultUI: true,
     zoomControl: true,
   }
+
 
   return (
       <>
