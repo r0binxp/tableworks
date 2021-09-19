@@ -15,22 +15,16 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
-export default function AccessHistory(props) {
-
-  const [user, setUser] = useState(props.user)
-
-  useEffect(() => {
-      setUser(props.user)
-  },[props.user])
+export default function AccessHistory({user, open, setOpen, title,  ...props}) {
 
   const handleClose = () => {
-    props.setOpen(false);
+    setOpen(false);
   };
 
   return (
     <div>
-      <Dialog maxWidth='lg' open={props.open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">{props.title}</DialogTitle>
+      <Dialog maxWidth='lg' open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title">{title}</DialogTitle>
         <DialogContent>
             <Grid container spacing={3}>
                 <Table>
@@ -45,17 +39,16 @@ export default function AccessHistory(props) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {props.user && (
-                        props.user.access.map((row) => (
-                            <TableRow key={row.date}>
-                                <TableCell>
-                                    {row.location}
-                                </TableCell>
-                                <TableCell>
-                                    {row.date}
-                                </TableCell>
-                            </TableRow>
-                        )))}
+                          {user?.access?.map((row) => (
+                              <TableRow key={row.date}>
+                                  <TableCell>
+                                      {row.location}
+                                  </TableCell>
+                                  <TableCell>
+                                      {row.date}
+                                  </TableCell>
+                              </TableRow>
+                        ))}
                     </TableBody>
                 </Table>
             </Grid>

@@ -54,7 +54,6 @@ export default function Table(props) {
     const [openConfirm, setOpenConfirm] = useState(false)
     const [openEdit, setOpenEdit] = useState(false)
     const [openHistory, setOpenHistory] = useState(false)
-    const [selected, setSelected] = useState()
     
     // store actions
     const setSelectedId = (payload) => dispatch( actions.setSelectedId(payload) );
@@ -77,16 +76,22 @@ export default function Table(props) {
       deleteUser(user.id)
     }
     const handleEditUser = (user) => {
-      editUser(user)
+      let endUser = {
+        ...selectedUser,
+        id: user.id, 
+        firstName: user.firstName,
+        LastName: user.LastName,
+        email: user.email,
+        dni: user.dni,
+        address: user.address
+      }
+      editUser(endUser)
       setOpenEdit(false)
       dispatch(actions.setSelectedId(""))
     }
 
-    const handleDataUserSelected = (location) => {
-      setSelected({
-        lat: location.lat,
-        lng: location.lng
-      })
+    const handleDataUserSelected = (user) => {
+      setSelectedId(user)
     }
     
   return (
@@ -95,10 +100,10 @@ export default function Table(props) {
       <Container  className={classes.Container} component="main" maxWidth="lg">
         <AlertDialog open={openConfirm} setOpen={setOpenConfirm} color="secondary" text={'Are you sure to delete? This action can not be undone'} title={`Delete User : ${selectedUser.firstName} ${selectedUser.LastName}`} accept={() => handleDeleteUser(selectedUser)}/>
         <EditDialog open={openEdit} setOpen={setOpenEdit} color="primary"  title={`Edit User : ${selectedUser.firstName} ${selectedUser.LastName}`} user={selectedUser} handleEditUser={() => handleEditUser}/>
-        <AccessHistory open={openHistory} setOpen={setOpenHistory} color="primary"  title={`Acces History : ${selectedUser.firstName} ${selectedUser.LastName}`} user={selectedUser} />
+        {selectedUser && <AccessHistory open={openHistory} setOpen={setOpenHistory} color="primary"  title={`Acces History : ${selectedUser.firstName} ${selectedUser.LastName}`} user={selectedUser} />}
 
         <Card>
-          {users && (
+          {users ? (
             <>
               <div className="row">
                 <div className="col-12 py-2 cards-header">
@@ -112,18 +117,18 @@ export default function Table(props) {
                 mt={4}
                 actions={[
                   {
-                    icon: () => <Create color="primary" />,
                     tooltip: 'Save User',
+                    icon: () => <Create color="primary" />,
                     onClick: (event, rowData) => {setOpenEdit(true);setSelectedId(rowData)}
                   },
                   {
-                    icon: () => <DeleteIcon color="secondary" />,
                     tooltip: 'Delete User',
+                    icon: () => <DeleteIcon color="secondary" />,
                     onClick: (event, rowData) => {setOpenConfirm(true);setSelectedId(rowData)}
                   },
                   {
-                    icon: () => <VpnKeyIcon color="default" />,
                     tooltip: 'Acces History',
+                    icon: () => <VpnKeyIcon  />,
                     onClick: (event, rowData) => {setOpenHistory(true);setSelectedId(rowData)}
                   }
                 ]}
@@ -133,19 +138,17 @@ export default function Table(props) {
                   actionsColumnIndex: -1
                 }}
                 data={Array.from(users)}
-                onRowClick={(e, rowData) => handleDataUserSelected(rowData.location) }
+                onRowClick={(e, rowData) => handleDataUserSelected(rowData) }
                 columns={columns}
                 title={""}
               />
             </>
-          )}
+          ) : ' '}
         </Card>
       </Container>
       <Container className={classes.Container} component="main">
         <Card className="mt-5">
-          <Map
-            selectedUser={selected}
-          />
+          <Map />
         </Card>
       </Container>
       <Container className={classes.Container} component="main" >

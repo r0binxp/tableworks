@@ -148,9 +148,9 @@ const usersData = [
 ]
 
 const initialState = {
-    users: [],
+    users: usersData,
     logged: false,
-    selectedUser: "",
+    selectedUser: {},
 }
 
 const reduceStore = (state = initialState, action) => {

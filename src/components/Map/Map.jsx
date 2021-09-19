@@ -1,17 +1,21 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 // Redux
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import * as actions from '../../actions/actions'
 
 // React Google Maps API
-import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
+import { GoogleMap, InfoWindow, Marker, useJsApiLoader } from '@react-google-maps/api';
 
 // CSS
 import '../../index.css'
+import InfoWindowComponent from './InfoWindow/InfoWindowComponent';
 
-const Map = ({selectedUser}) => {
-
+const Map = () => {
+  const dispatch = useDispatch();
+  const setSelectedId = (payload) => dispatch( actions.setSelectedId(payload) );
   const users = useSelector(store => store.users)
+  const selectedUser = useSelector(store => store.selectedUser)
 
   const containerStyle = {
     width: '100%',
@@ -32,7 +36,13 @@ const Map = ({selectedUser}) => {
     disableDefaultUI: true,
     zoomControl: true,
   }
-
+  const showInfoWindow = (user, otro) => {
+    setSelectedId(user)
+  }
+  const closeInfoWindow = () => {
+    setSelectedId({})
+  }
+ 
 
   return (
       <>
@@ -49,17 +59,38 @@ const Map = ({selectedUser}) => {
             </div>
             <GoogleMap
                 mapContainerStyle={containerStyle}
-                center={selectedUser ? selectedUser : center}
+                center={selectedUser?.location ? selectedUser.location : center}
                 zoom={13}
                 options={options}
-            >
-              {users && users.map((user, i) => {
-                if(user.location){
+                onClick={() => closeInfoWindow()}
+                onDrag={() => closeInfoWindow()}
+                clickableIcons={false}
+            > 
+            { selectedUser.id &&
+              <InfoWindow
+                  position={{lat: selectedUser?.location?.lat, lng: selectedUser?.location?.lng}}
+                  onCloseClick={() => closeInfoWindow()}
+              >
+                <InfoWindowComponent user={selectedUser} />
+              </InfoWindow>
+            }
+              {users && users?.map((user, i) => {
+                if(user?.location){
                   return (
                     <Marker
+                      title={`${user.firstName} ${user.LastName}`}
+                      label={{
+                        text: user.email,
+                        className: 'markerLabel'
+                      }}
+                      animation="BOUNCE"
                       key={i}
-                      position={{lat: user.location.lat, lng: user.location.lng}}
+                      clickable={true}
+                      onClick={() => showInfoWindow(user)}
+                      position={{lat: user?.location?.lat, lng: user?.location?.lng}}
                     />)
+                } else {
+                  <></>
                 }
               })}
             </GoogleMap>
